@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "SF-Industries Error Inspector",
+  "version": "1.0.0",
+  "description": "Detects and displays hidden errors in Salesforce Industries (Vlocity) network responses",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "devtools_page": "devtools.html",
+  "permissions": [],
+  "homepage_url": "https://github.com/noriabits/SF-Industries-Error-Inspector"
+}

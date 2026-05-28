@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SF Aura Error Inspector</title>
+  <link rel="stylesheet" href="panel.css" />
+</head>
+<body>
+  <div class="toolbar">
+    <h1>SF-Industries Error Inspector</h1>
+    <div class="toolbar-actions">
+      <span class="badge" id="errorCount">0</span>
+      <button id="clearBtn" title="Clear all">&#x1f5d1; Clear</button>
+      <label class="toggle">
+        <input type="checkbox" id="autoScroll" checked />
+        <span>Auto-scroll</span>
+      </label>
+      <label class="toggle">
+        <input type="checkbox" id="showAllRequests" checked />
+        <span>Show all/only error requests</span>
+      </label>
+    </div>
+  </div>
+  <div id="errorList" class="error-list"></div>
+  <div id="emptyState" class="empty-state">
+    <div class="empty-icon">&#x1f50d;</div>
+    <p>Listening for SF-Industries errors...</p>
+    <p class="subtitle">Errors hidden inside "SUCCESS" responses will appear here automatically.</p>
+  </div>
+  <script src="panel.js"></script>
+</body>
+</html>
