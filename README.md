@@ -19,8 +19,8 @@ This extension catches these hidden errors automatically.
 ## Features
 
 - **Auto-detects hidden errors** in SUCCESS responses (IP errors, DR errors, Apex Remote errors)
-- **Filters SF-Industries traffic only** — shows only requests with a `dataSourceMap` (IPs, DRs, Apex Remote), ignoring unrelated Aura noise
-- **Shows dataSource type** — tags each request as `integrationprocedure`, `dataraptor`, `apexremote`, etc.
+- **Filters SF-Industries traffic only** — shows requests with a `dataSourceMap` (IPs, DRs, Apex Remote) plus generic OmniStudio ApexAction invokes (e.g. `GenericInvoke2NoCont`), ignoring unrelated Aura noise
+- **Shows dataSource type** — tags each request as `integrationprocedure`, `dataraptor`, `apexremote`, `apexaction`, etc.
 - **Shows procedure/bundle name** — instantly see which IP, DR bundle, or Apex class.method failed
 - **Decodes nested JSON** — fully parses and prettifies the deeply encoded payloads
 - **Displays parsed request inputs** — see exactly what parameters were sent without manual decoding
@@ -35,7 +35,7 @@ This extension catches these hidden errors automatically.
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable **Developer mode** (toggle in the top right)
 3. Click **Load unpacked**
-4. Select this folder: `chrome-extensions/sf-aura-error-inspector/`
+4. Select this folder: `sf-aura-error-inspector/`
 5. Open Chrome DevTools (F12) on any Salesforce org
 6. Look for the **"SF-Industries"** tab in the DevTools panel
 
@@ -66,6 +66,7 @@ This extension catches these hidden errors automatically.
 | `integrationprocedure` | IP method name (e.g., `ESM_CreateOrderGroupAssignMembers`) |
 | `dataraptor` | Bundle name (e.g., `ESMExtractOrderMemberCount`) |
 | `apexremote` | Class.method (e.g., `CpqAppHandler.getItemReverseQuantity`) |
+| `apexaction` | Class.method of a generic OmniStudio invoke (e.g., `IntegrationProcedureService.ESM_AddOMOGToWCOIsCopyToEO`) |
 
 ## Screenshot
 

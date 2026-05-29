@@ -66,6 +66,12 @@
     });
   }
 
+  // --- Utility: Detect OmniStudio generic ApexAction invokes (GenericInvoke2/NoCont etc.) ---
+  function isGenericInvoke(params) {
+    if (!params) return false;
+    return typeof params.sClassName === "string" && typeof params.sMethodName === "string";
+  }
+
   // --- Utility: Detect errors in response ---
   function detectErrors(responseBody) {
     const errors = [];
@@ -165,6 +171,7 @@
       const ds = deepDecodeJson(params.dataSourceMap);
       if (ds?.type) return ds.type;
     }
+    if (isGenericInvoke(params)) return "apexaction";
     return null;
   }
 
@@ -192,6 +199,11 @@
     if (params.dataSourceMap?.value?.className) {
       return params.dataSourceMap.value.className;
     }
+    // OmniStudio generic invoke (GenericInvoke2NoCont etc.)
+    if (params.sClassName && params.sMethodName) {
+      return params.sClassName + "." + params.sMethodName;
+    }
+    if (params.sMethodName) return params.sMethodName;
     // OmniScript
     if (params.sClassName) return params.sClassName;
     // Generic
@@ -399,6 +411,7 @@
         const ds = deepDecodeJson(params.dataSourceMap);
         if (ds?.type) return true;
       }
+      if (isGenericInvoke(params)) return true;
       return false;
     });
     if (relevantActions.length === 0) return;
