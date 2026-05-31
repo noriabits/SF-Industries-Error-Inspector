@@ -82,6 +82,3 @@ This extension catches these hidden errors automatically.
 ## Privacy Policy
 
 This extension collects no personal data. See [PRIVACY_POLICY.md](PRIVACY_POLICY.md) for details.
-
-> **Chrome Web Store submission:** paste the following URL into the Privacy Policy field in the developer dashboard:  
-> `https://github.com/noriabits/SF-Industries-Error-Inspector/blob/main/PRIVACY_POLICY.md`
