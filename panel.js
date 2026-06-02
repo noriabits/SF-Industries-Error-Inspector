@@ -140,16 +140,31 @@
     if (obj.errorMessage && typeof obj.errorMessage === "string" && !isSuccessIndicator(obj.errorMessage)) {
       return { message: obj.errorMessage, errorCode: obj.errorCode || null };
     }
-    if (obj.IPResult && obj.IPResult.error && typeof obj.IPResult.error === "string" && !isSuccessIndicator(obj.IPResult.error)) {
+
+    // Explicit success:false flag (OmniStudio IPResult/DRResult) — dig for the
+    // underlying message, which often lives in a nested "result" object.
+    if (obj.success === false) {
+      const nested = findErrorInObject(obj.result);
+      if (nested) return nested;
       return {
-        message: obj.IPResult.error,
-        errorCode: obj.errorCode || obj.IPResult.errorCode || null,
+        message:
+          obj.error && typeof obj.error === "string" && !isSuccessIndicator(obj.error)
+            ? obj.error
+            : "Operation failed (success: false)",
+        errorCode: obj.errorCode || null,
       };
     }
 
-    // Check for DRResult errors (DataRaptor)
-    if (obj.DRResult && obj.DRResult.error && typeof obj.DRResult.error === "string" && !isSuccessIndicator(obj.DRResult.error)) {
-      return { message: obj.DRResult.error, errorCode: obj.errorCode || null };
+    // Recurse into known OmniStudio result wrappers. The error can be nested
+    // several levels deep (e.g. IPResult.result.error), so don't assume a fixed
+    // depth — and don't let a top-level error:"OK" mask an inner failure.
+    if (obj.IPResult && typeof obj.IPResult === "object") {
+      const nested = findErrorInObject(obj.IPResult);
+      if (nested) return nested;
+    }
+    if (obj.DRResult && typeof obj.DRResult === "object") {
+      const nested = findErrorInObject(obj.DRResult);
+      if (nested) return nested;
     }
 
     // Check nested "result" field

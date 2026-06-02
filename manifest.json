@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "SF-Industries Error Inspector",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Detects and displays hidden errors in Salesforce Industries (Vlocity) network responses",
   "icons": {
     "16": "icons/icon16.png",
