@@ -35,7 +35,7 @@ This extension catches these hidden errors automatically.
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable **Developer mode** (toggle in the top right)
 3. Click **Load unpacked**
-4. Select this folder: `sf-aura-error-inspector/`
+4. Select this folder: `SF-Industries-Error-Inspector/`
 5. Open Chrome DevTools (F12) on any Salesforce org
 6. Look for the **"SF-Industries"** tab in the DevTools panel
 
@@ -78,6 +78,25 @@ This extension catches these hidden errors automatically.
 - The **dataSource type** tag helps distinguish between IPs, DRs, and Apex calls at a glance
 - The **procedure name** tag helps you quickly identify which component failed
 - **Request Input** section shows the decoded parameters — useful for reproducing issues
+
+## Releasing
+
+1. Bump `version` in [manifest.json](manifest.json) and commit
+2. Build the upload package:
+   ```powershell
+   powershell -File scripts/build-zip.ps1
+   ```
+   This writes `dist/sf-industries-error-inspector-<version>.zip` with only the runtime files
+3. In the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole), open the extension → **Package** → **Upload new package** and select the zip
+4. If needed, update the store listing (images are in [webstore/](webstore/))
+5. **Submit for review**
+6. Tag the release and push the tag:
+   ```powershell
+   git tag v<version>
+   git push origin v<version>
+   ```
+
+> An unpacked install doesn't pick up code changes automatically: click reload on `chrome://extensions` and reopen DevTools.
 
 ## Privacy Policy
 
